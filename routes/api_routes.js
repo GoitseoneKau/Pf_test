@@ -8,7 +8,7 @@ let pay_status
 // let local = "https://kindly-amazed-collie.ngrok-free.app"
 const local_url = false
 // let local = "https://kindly-amazed-collie.ngrok-free.app"
-let local =local_url?"https://kindly-amazed-collie.ngrok-free.app":"localhost"
+let local =local_url?"https://kindly-amazed-collie.ngrok-free.app":"https://payfast-test.onrender.com"
 
 const router = express.Router();
 

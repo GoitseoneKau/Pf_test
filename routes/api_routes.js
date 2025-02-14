@@ -5,7 +5,7 @@ import axios from "axios";
 
 let sale_info
 let pay_status
-// let local = "ttps://kindly-amazed-collie.ngrok-free.app"
+// let local = "https://kindly-amazed-collie.ngrok-free.app"
 let local =""
 
 const router = express.Router();
@@ -127,9 +127,10 @@ router.use('/notify_url', (request, response) => {//get is a request fuction fro
 })
 
 router.get('/status',(request,response)=>{
+    pay_status = {status:"FAILED"}
     response.send(pay_status)
 
-    pay_status = {status:"FAILED"}
+  
 })
 
 router.post('/cancel_url', (request, response) => {//get is a request fuction from client
@@ -143,9 +144,9 @@ router.post('/pay', async (request, response) => {//get is a request fuction fro
     let merchant_info = {
         merchant_id: "10011926",
         merchant_key: "m69a134j9vtdg",
-        return_url: "/",
-        cancel_url: "/api/cancel_url",
-        notify_url: "/api/notify_url"
+        return_url: `${local}/`,
+        cancel_url: `${local}/api/cancel_url`,
+        notify_url: `${local}/api/notify_url`
     };
     sale_info = { ...merchant_info, ...user_info }
 
@@ -203,7 +204,7 @@ router.post('/popuppay', async (request, response) => {//get is a request fuctio
     delete sale_info.cell_number
 
 
-    const host = 'https://sandbox.payfast.co.za​/onsite/engine.js'
+    const host = 'https://sandbox.payfast.co.za​/onsite/process'
 
 
     const dataToString = (dataArray) => {
@@ -264,7 +265,7 @@ router.post('/popuppay', async (request, response) => {//get is a request fuctio
 
     console.log("stringed data", stringed_data,"uuid",data);
 
-    response.json(data)
+    response.send(data==undefined?{}:data)
 })
 
 // //CRUD functions for Posts

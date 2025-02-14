@@ -54,22 +54,22 @@
                 'Content-Type': 'application/json'
                 }
             });
-        const status = await s.json()
-        return status.status
+            const status = await s.json();
+            return status.status;
         }
      
         let t
         getStatus().then((data)=>{
             if(data==="SUCCESSFUL"){
-                let formEl = document.getElementById('test')
-                let newNode = document.createElement('div')
+                let formEl = document.getElementById('test');
+                let newNode = document.createElement('div');
                 let newText = document.createElement('h3');
-                newText.innerHTML = 'Payment Succesful'
-                newNode.append(newText)
-                formEl.appendChild(newNode)
-                btnSubmit.ariaDisabled = 'true'
-                btnSubmit.setAttribute("disabled","true")
-               t=setTimeout(()=> window.location.replace(' https://kindly-amazed-collie.ngrok-free.app'),1500)
+                newText.innerHTML = 'Payment Succesful';
+                newNode.append(newText);
+                formEl.appendChild(newNode);
+                btnSubmit.ariaDisabled = 'true';
+                btnSubmit.setAttribute("disabled","true");
+               t=setTimeout(()=> window.location.replace(' https://kindly-amazed-collie.ngrok-free.app'),1500);
             }
         })
 
@@ -90,8 +90,10 @@
                 body: jsonProps
             });
             const d = await rawResponse.json()
+            
+            window.payfast_do_onsite_payment(JSON.stringify(d))
+
             console.log(JSON.stringify(d))
-            window.payfast_do_onsite_payment(JSON.stringify(d));
         };
        
     </script>

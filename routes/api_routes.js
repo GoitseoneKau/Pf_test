@@ -6,7 +6,7 @@ import axios from "axios";
 let sale_info
 let pay_status
 // let local = "https://kindly-amazed-collie.ngrok-free.app"
-const local_url = true
+const local_url = false
 // let local = "https://kindly-amazed-collie.ngrok-free.app"
 let local =local_url?"https://kindly-amazed-collie.ngrok-free.app":""
 

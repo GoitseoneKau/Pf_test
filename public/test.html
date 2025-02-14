@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://www.payfast.co.za/onsite/engine.js"></script>
+</head>
+<body>
+    <form id="test" method="post" onsubmit="post(event)">
+        <!-- <input type="hidden" name="merchant_id" value="10000100">
+        <input type="hidden" name="merchant_key" value="46f0cd694581a">
+        <input type="hidden" name="return_url" value="https://www.example.com/success">
+        <input type="hidden" name="cancel_url" value="https://www.example.com/cancel">
+        <input type="hidden" name="notify_url" value="https://www.example.com/notify"> -->
+        name:<input type="text" name="name_first" value="John"><br>
+        surname:<input type="text" name="name_last" value="Doe"><br>
+        email:<input type="text" name="email_address" value="john@doe.com"><br>
+        cell: <input type="text" name="cell_number" value="0823456789"><br>
+        <input type="hidden" name="m_payment_id" value="01AB"><br>
+        amount: <input type="text" name="amount" value="100.00"><br>
+        item :<input type="text" name="item_name" value="Test Item">
+
+        <input type="submit" value="Pay Now" />
+    </form>
+   
+    <script>
+        const btnSubmit = document.querySelector('input[type="submit"]')
+      
+        let url;
+      const post = async (e) => {
+            e.preventDefault()
+            let f =new FormData(document.getElementById('test'))
+         
+            const formProps = Object.fromEntries(f);
+          let r = JSON.stringify(formProps)
+            const rawResponse = await fetch(' https://kindly-amazed-collie.ngrok-free.app/api/pay', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: r
+            });
+            const h = await rawResponse.json()
+            url = h.redirectUrl
+            window.location.assign(h.redirectUrl)
+           
+        };
+
+        const getStatus =async ()=>{
+            const s = await fetch(' https://kindly-amazed-collie.ngrok-free.app/api/status', {
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json'
+                }
+            });
+        const status = await s.json()
+        return status.status
+        }
+     
+        let t
+        getStatus().then((data)=>{
+            if(data==="SUCCESSFUL"){
+                let formEl = document.getElementById('test')
+                let newNode = document.createElement('div')
+                let newText = document.createElement('h3');
+                newText.innerHTML = 'Payment Succesful'
+                newNode.append(newText)
+                formEl.appendChild(newNode)
+                btnSubmit.ariaDisabled = 'true'
+                btnSubmit.setAttribute("disabled","true")
+               t=setTimeout(()=> window.location.replace(' https://kindly-amazed-collie.ngrok-free.app'),1500)
+            }
+        })
+
+        
+    </script>
+    <script>
+        const postpop = async (e) => {
+            e.preventDefault()
+            let f =new FormData(document.getElementById('test'))
+         
+            const formProps = Object.fromEntries(f);
+          let jsonProps = JSON.stringify(formProps)
+            const rawResponse = await fetch('https://kindly-amazed-collie.ngrok-free.app/api/popuppay', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: jsonProps
+            });
+            const d = await rawResponse.json()
+            console.log(JSON.stringify(d))
+            window.payfast_do_onsite_payment(JSON.stringify(d));
+        };
+       
+    </script>
+</body>
+</html>

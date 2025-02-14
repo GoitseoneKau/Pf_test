@@ -1,0 +1,20 @@
+{
+  "name": "testpay",
+  "version": "1.0.0",
+  "description": "test payfast",
+  "main": "testpay.js",
+  "scripts": {
+    "test": "nodemon testpay.js"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dns": "^0.2.2",
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
+  }
+}

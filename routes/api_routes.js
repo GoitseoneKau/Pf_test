@@ -5,6 +5,8 @@ import axios from "axios";
 
 let sale_info
 let pay_status
+// let local = "ttps://kindly-amazed-collie.ngrok-free.app"
+let local =""
 
 const router = express.Router();
 
@@ -141,9 +143,9 @@ router.post('/pay', async (request, response) => {//get is a request fuction fro
     let merchant_info = {
         merchant_id: "10011926",
         merchant_key: "m69a134j9vtdg",
-        return_url: " https://kindly-amazed-collie.ngrok-free.app",
-        cancel_url: " https://kindly-amazed-collie.ngrok-free.app/api/cancel_url",
-        notify_url: " https://kindly-amazed-collie.ngrok-free.app/api/notify_url"
+        return_url: "/",
+        cancel_url: "/api/cancel_url",
+        notify_url: "/api/notify_url"
     };
     sale_info = { ...merchant_info, ...user_info }
 
@@ -193,15 +195,15 @@ router.post('/popuppay', async (request, response) => {//get is a request fuctio
     let merchant_info = {
         merchant_id: "10011926",
         merchant_key: "m69a134j9vtdg",
-        return_url: " https://kindly-amazed-collie.ngrok-free.app",
-        cancel_url: " https://kindly-amazed-collie.ngrok-free.app/api/cancel_url",
-        notify_url: " https://kindly-amazed-collie.ngrok-free.app/api/notify_url"
+        return_url: `${local}/`,
+        cancel_url: `${local}/api/cancel_url`,
+        notify_url: `${local}/api/notify_url`
     };
     sale_info = { ...merchant_info, ...user_info }
     delete sale_info.cell_number
 
 
-    const host = 'https://sandbox.payfast.co.za​/onsite/process'
+    const host = 'https://sandbox.payfast.co.za​/onsite/engine.js'
 
 
     const dataToString = (dataArray) => {

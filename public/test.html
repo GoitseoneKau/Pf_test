@@ -34,7 +34,7 @@
          
             const formProps = Object.fromEntries(f);
           let r = JSON.stringify(formProps)
-            const rawResponse = await fetch(' https://kindly-amazed-collie.ngrok-free.app/api/pay', {
+            const rawResponse = await fetch(' /api/pay', {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'
@@ -48,7 +48,7 @@
         };
 
         const getStatus =async ()=>{
-            const s = await fetch(' https://kindly-amazed-collie.ngrok-free.app/api/status', {
+            const s = await fetch('/api/status', {
                 method: 'GET',
                 headers: {
                 'Content-Type': 'application/json'
@@ -69,7 +69,7 @@
                 formEl.appendChild(newNode);
                 btnSubmit.ariaDisabled = 'true';
                 btnSubmit.setAttribute("disabled","true");
-               t=setTimeout(()=> window.location.replace(' https://kindly-amazed-collie.ngrok-free.app'),1500);
+               t=setTimeout(()=> window.location.replace('/'),1500);
             }
         })
 
@@ -82,7 +82,7 @@
          
             const formProps = Object.fromEntries(f);
           let jsonProps = JSON.stringify(formProps)
-            const rawResponse = await fetch('https://kindly-amazed-collie.ngrok-free.app/api/popuppay', {
+            const rawResponse = await fetch('/api/popuppay', {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'

@@ -4,6 +4,7 @@
   "description": "test payfast",
   "main": "testpay.js",
   "scripts": {
+    "serve": "node testpay.js",
     "test": "nodemon testpay.js"
   },
   "type": "module",
